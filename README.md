@@ -40,9 +40,14 @@ $$L = -\frac{1}{N}\sum_{i}\sum_{c=1}^{M}y_{ic}log(p_{ic})$$
 
 ## Pytorch
 #### 1. Backward和Optimize
-optimizer.zero_grad(): 将梯度清零，不清零的话梯度会和上一个batch的数据相关。该函数要写在反向传播和梯度下降之前。
+optimizer.zero_grad( ): 将梯度清零，不清零的话梯度会和上一个batch的数据相关。该函数要写在反向传播和梯度下降之前。
+ 
+loss.backward(): Pytorch的反向传播通过autograd包实现，根据tensor张量进行过的数学运算来自动计算梯度。使用tensor.backward()后，所有的梯度自动计算，tensor的梯度会累加到它的.grad属性里面。
 
-loss.backward(): 
+optimizer.step(): step()函数的作用是执行一次优化步骤，通过梯度下降法来更新参数的值。因为梯度下降是基于梯度的，所以在执行optimizer.step()函数前应先执行loss.backward()函数来计算梯度。
+
+**注意**：optimizer只负责通过梯度下降进行优化，而不负责产生梯度，梯度是tensor.backward()方法产生的。
+
 
 
 
