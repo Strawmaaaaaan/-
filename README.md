@@ -48,7 +48,7 @@ $$L = -\frac{1}{N}\sum_{i}\sum_{c=1}^{M}y_{ic}log(p_{ic})$$
 
 **注意**：optimizer只负责通过梯度下降进行优化，而不负责产生梯度，梯度是tensor.backward()方法产生的。
 
-在Pytorch的计算图中，包含两种元素：tensor和function。其中function就是一些可求导的运算，tensor可以细分为叶子结点和非叶子结点。在使用backward()函数反向计算tensor的梯度时，只是计算满足这几个条件的tensor的梯度：1. 叶子结点的tensor 2. reguires_grad=True 3. 依赖该tensor的所有tensor的requirs_grad=True. 
+在Pytorch的计算图中，包含两种元素：tensor和function。其中function就是一些可求导的运算，tensor可以细分为叶子结点和非叶子结点。在使用backward()函数反向计算tensor的梯度时，只是计算满足这几个条件的tensor的梯度：1. 叶子结点的tensor 2. reguires_grad=True 3. 依赖该tensor的所有tensor的requirs_grad=True.   
 如下图所示，在进行了m.backward()以后，非叶子结点如y的梯度会被释放掉，如果想要保留非叶子结点的梯度，**可以使用m.backward(retain_graph=True)**
 ![image](https://github.com/Strawmaaaaaan/-/blob/main/backword_1.png)
 
