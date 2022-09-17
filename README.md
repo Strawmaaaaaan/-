@@ -54,7 +54,8 @@ $$L = -\frac{1}{N}\sum_{i}\sum_{c=1}^{M}y_{ic}log(p_{ic})$$
 detach()函数的作用是返回一个新的tensor张量，且requires_grad = False，起到截断梯度的效果，**注意：即使后续将其requires_grad置为true也不会具有梯度**
 
 #### 2. 检查梯度
-
+##### （1）出现nan的情况：
+- 
 
 
 
