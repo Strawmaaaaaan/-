@@ -51,9 +51,9 @@ $$L = -\frac{1}{N}\sum_{i}\sum_{c=1}^{M}y_{ic}log(p_{ic})$$
 在Pytorch的计算图中，包含两种元素：tensor和function。其中function就是一些可求导的运算，tensor可以细分为叶子结点和非叶子结点。在使用backward()函数反向计算tensor的梯度时，只是计算满足这几个条件的tensor的梯度：1. 叶子结点的tensor 2. reguires_grad=True 3. 依赖该tensor的所有tensor的requirs_grad=True.   
 如下图所示，在进行了m.backward()以后，非叶子结点如y的梯度会被释放掉，如果想要保留非叶子结点的梯度，**可以使用m.backward(retain_graph=True)**
 ![image](https://github.com/Strawmaaaaaan/-/blob/main/backword_1.png)  
--detach()函数的作用是返回一个新的tensor张量，且requires_grad = False，起到截断梯度的效果，域源张量共享数据内存**注意：即使后续将其requires_grad置为true也不会具有梯度**
--clone()函数返回一个和源张量同样形状和device的张量，但是不与源数据共享内存，但是提供梯度的回溯
--.clone().detach()这样的组合只做简单的数据复制，不共享数据也不共享梯度，两个张量没有关联
+- detach()函数的作用是返回一个新的tensor张量，且requires_grad = False，起到截断梯度的效果，域源张量共享数据内存**注意：即使后续将其requires_grad置为true也不会具有梯度**
+- clone()函数返回一个和源张量同样形状和device的张量，但是不与源数据共享内存，但是提供梯度的回溯
+- .clone().detach()这样的组合只做简单的数据复制，不共享数据也不共享梯度，两个张量没有关联
 
 #### 2. 检查梯度
 ##### （1）出现nan的情况：
